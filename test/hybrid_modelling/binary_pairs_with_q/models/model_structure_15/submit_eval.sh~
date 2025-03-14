@@ -1,0 +1,35 @@
+#!/bin/bash
+# embedded options to bsub - start with #BSUB
+# -- our name ---
+#BSUB -J SingleCoreJulia 
+# -- choose queue --
+#BSUB -q hpc
+# -- specify that we need 4GB of memory per core/slot -- 
+#BSUB -R "rusage[mem=16GB]"
+# -- Notify me by email when execution begins --
+#BSUB -B
+# -- Notify me by email when execution ends   --
+#BSUB -N
+# -- email address -- 
+# please uncomment the following line and put in your e-mail address,
+# if you want to receive e-mail notifications on a non-default address
+##BSUB -u your_email_address
+# -- Output File --
+#BSUB -o Output_%J.out
+# -- Error File --
+#BSUB -e Output_%J.err
+# -- estimated wall clock time (execution time): hh:mm -- 
+#BSUB -W 72:00 
+# -- Number of cores requested -- 
+#BSUB -n 1 
+# -- Specify the distribution of the cores: on a single node --
+#BSUB -R "span[hosts=1]"
+# -- end of LSF options -- 
+
+module load julia/1.10.2
+
+#supported since julia-1.7 or so
+#we are asking for 1 core above, so the following should be "1"
+export JULIA_NUM_THREADS=$LSB_DJOB_NUMPROC
+
+julia main_eval.jl

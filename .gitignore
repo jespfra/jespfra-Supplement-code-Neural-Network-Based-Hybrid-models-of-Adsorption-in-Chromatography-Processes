@@ -1,0 +1,11 @@
+*.h5 
+*.out
+*.err
+*.sh
+*.txt
+**/meta_model_info.csv
+*.svg
+# Allow SVGs in specific folders
+!test/hybrid_modelling/binary_pairs/models/Evaluation/*.svg
+!test/hybrid_modelling/binary_pairs_with_q/models/Evaluation/*.svg
+!test/hybrid_modelling/binary/binary_case_study/models/Evaluation/*.svg
